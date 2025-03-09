@@ -68,3 +68,16 @@ We welcome contributions from the community. Please follow these steps:
 - An enterprise-ready, production-deployed solution – It is an open-source framework component, designed to be customized and extended by AI teams.
 
 (For now, QueryStudio is a Jupyter-based tool, but planned enhancements will improve usability for AI teams.)
+
+## ✉️ Connect with Us – Let’s Build Together!
+We’re excited to collaborate with the AI & Data Science community to push the boundaries of Text-to-SQL automation!
+
+- Have feedback, feature suggestions, or want to discuss Text-to-SQL?
+- Looking to contribute or explore enterprise-level solutions?
+
+**Reach out to us via:**
+- GitHub Discussions – Start a thread in Discussions (https://github.com/otacta/query-studio/issues)
+- Email Us – admin@otacta.com
+- Join the Community – Engage with us on LinkedIn
+
+🚀 We’d love to hear your thoughts, collaborate on improvements, and see how QueryStudio helps your AI & ML projects!
