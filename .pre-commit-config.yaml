@@ -1,0 +1,263 @@
+repos:
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: [--profile, black]
+        exclude: ^explore/|.*\.ipynb$
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.4
+    hooks:
+      - id: ruff
+        name: ruff
+        description: "Run 'ruff' for extremely fast Python linting"
+        entry: ruff check --force-exclude
+        language: python
+        types_or: [python, pyi, jupyter]
+        args: [--fix, --unsafe-fixes]
+        require_serial: true
+        additional_dependencies: []
+        minimum_pre_commit_version: "2.9.2"
+        stages: [pre-commit, pre-merge-commit, pre-push, manual]
+        exclude: ^explore/|.*\.ipynb$
+
+      - id: ruff-format
+        name: ruff-format
+        description: "Run 'ruff format' for extremely fast Python formatting"
+        entry: ruff format --force-exclude
+        language: python
+        types_or: [python, pyi, jupyter]
+        args: []
+        require_serial: true
+        additional_dependencies: []
+        minimum_pre_commit_version: "2.9.2"
+        exclude: ^explore/|.*\.ipynb$
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.10
+    hooks:
+      - id: bandit
+        name: bandit
+        description: "Bandit is a tool for finding common security issues in Python code"
+        entry: bandit
+        language: python
+        language_version: python3
+        types: [python]
+        require_serial: true
+        args:
+          - "--severity-level"
+          - "high"
+          - "--recursive"
+          - "./data_production"
+        exclude: ^myenv/,^tests/,^explore/|.*\.ipynb$
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.19.0
+    hooks:
+      - id: pyupgrade
+        name: pyupgrade
+        description: Automatically upgrade syntax for newer versions.
+        entry: pyupgrade
+        language: python
+        types: [python]
+        files: ""
+        minimum_pre_commit_version: 0.15.0
+        exclude: ^explore/|.*\.ipynb$
+
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-check-blanket-noqa
+        name: check blanket noqa
+        description: "Enforce that `noqa` annotations always occur with specific codes."
+        entry: "(?i)# noqa(?!: )"
+        language: pygrep
+        types: [python]
+        exclude: ^explore/|.*\.ipynb$
+      - id: python-check-blanket-type-ignore
+        name: check blanket type ignore
+        description: "Enforce that `# type: ignore` annotations always occur with specific codes."
+        entry: '# type:? *ignore(?!\[|\w)'
+        language: pygrep
+        types: [python]
+        exclude: ^explore/|.*\.ipynb$
+      - id: python-check-mock-methods
+        name: check for not-real mock methods
+        description: "Prevent common mistakes of `assert mck.not_called()`, `assert mck.called_once_with(...)` and `mck.assert_called`."
+        language: pygrep
+        entry: >
+          (?x)(
+              assert .*\.(
+                  not_called|
+                  called_
+              )|
+              (?<!\bAsyncMock)(?<!\bMagicMock)(?<!\bMock)(?<!\bNonCallableMagicMock)(?<!\bNonCallableMock)(?<!\bPropertyMock)
+              \.assert_(
+                  any_call|
+                  called|
+                  called_once|
+                  called_once_with|
+                  called_with|
+                  has_calls|
+                  not_called
+              )($|[^(\w])
+          )
+        types: [python]
+        exclude: ^explore/|.*\.ipynb$
+      - id: python-no-eval
+        name: check for eval()
+        description: "A quick check for the `eval()` built-in function"
+        entry: '\beval\('
+        language: pygrep
+        types: [python]
+        exclude: ^explore/|.*\.ipynb$
+      - id: python-no-log-warn
+        name: use logger.warning(
+        description: "A quick check for the deprecated `.warn()` method of python loggers"
+        entry: '(?<!warnings)\.warn\('
+        language: pygrep
+        types: [python]
+        exclude: ^explore/|.*\.ipynb$
+      - id: python-use-type-annotations
+        name: type annotations not comments
+        description: "Enforce that python3.6+ type annotations are used instead of type comments"
+        entry: "# type(?!: *ignore([^a-zA-Z0-9]|$))"
+        language: pygrep
+        types: [python]
+        exclude: ^explore/|.*\.ipynb$
+      - id: rst-backticks
+        name: rst ``code`` is two backticks
+        description: "Detect common mistake of using single backticks when writing rst"
+        entry: "^(?!    ).*(^| )`[^`]+`([^_]|$)"
+        language: pygrep
+        types: [rst]
+        exclude: ^explore/|.*\.ipynb$
+      - id: rst-directive-colons
+        name: rst directives end with two colons
+        description: "Detect mistake of rst directive not ending with double colon or space before the double colon"
+        entry: '^\s*\.\. [a-z]+(| | :):$'
+        language: pygrep
+        types: [rst]
+        exclude: ^explore/|.*\.ipynb$
+      - id: rst-inline-touching-normal
+        name: rst ``inline code`` next to normal text
+        description: "Detect mistake of inline code touching normal text in rst"
+        entry: '\w``\w'
+        language: pygrep
+        types: [rst]
+        exclude: ^explore/|.*\.ipynb$
+      - id: text-unicode-replacement-char
+        name: no unicode replacement chars
+        description: "Forbid files which have a UTF-8 Unicode replacement character"
+        entry: "\uFFFD"
+        language: pygrep
+        types: [text]
+        exclude: ^explore/|.*\.ipynb$
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+        name: check for added large files
+        description: prevents giant files from being committed.
+        entry: check-added-large-files
+        language: python
+        stages: [pre-commit, pre-push, manual]
+        minimum_pre_commit_version: 3.2.0
+        args: ["--maxkb=5024"]
+        exclude: ^explore/|.*\.ipynb$
+      - id: check-ast
+        name: check python ast
+        description: simply checks whether the files parse as valid python.
+        entry: check-ast
+        language: python
+        types: [python]
+        exclude: ^explore/|.*\.ipynb$
+      - id: check-builtin-literals
+        name: check builtin type constructor use
+        description: requires literal syntax when initializing empty or zero python builtin types.
+        entry: check-builtin-literals
+        language: python
+        types: [python]
+        exclude: ^explore/|.*\.ipynb$
+      - id: check-docstring-first
+        name: check docstring is first
+        description: checks a common error of defining a docstring after code.
+        entry: check-docstring-first
+        language: python
+        types: [python]
+        exclude: ^explore/|.*\.ipynb$
+      - id: check-merge-conflict
+        name: check for merge conflicts
+        description: checks for files that contain merge conflict strings.
+        entry: check-merge-conflict
+        language: python
+        types: [text]
+        exclude: ^explore/|.*\.ipynb$
+      - id: check-yaml
+        name: check yaml
+        description: checks yaml files for parseable syntax.
+        entry: check-yaml
+        language: python
+        types: [yaml]
+        args: ["--unsafe"]
+        exclude: ^explore/|.*\.ipynb$
+      - id: check-json
+        name: check json
+        description: checks json files for parseable syntax.
+        entry: check-json
+        language: python
+        types: [json]
+        exclude: ^explore/|.*\.ipynb$
+      - id: check-toml
+        exclude: ^explore/|.*\.ipynb$
+      - id: check-ast
+        exclude: ^explore/|.*\.ipynb$
+      - id: end-of-file-fixer
+        name: fix end of files
+        description: ensures that a file is either empty, or ends with one newline.
+        entry: end-of-file-fixer
+        language: python
+        types: [text]
+        stages: [pre-commit, pre-push, manual]
+        minimum_pre_commit_version: 3.2.0
+        exclude: ^explore/|.*\.ipynb$
+      - id: debug-statements
+        exclude: ^explore/|.*\.ipynb$
+      - id: pretty-format-json
+        args: ['--indent', '2']
+        name: pretty format json
+        description: sets a standard for formatting json files.
+        entry: pretty-format-json
+        language: python
+        types: [json]
+        exclude: ^explore/|.*\.ipynb$
+      - id: name-tests-test
+        name: python tests naming
+        description: verifies that test files are named correctly.
+        entry: name-tests-test
+        language: python
+        files: (^|/)tests/.+test_\.py$
+        exclude: ^explore/|.*\.ipynb$
+      - id: trailing-whitespace
+        name: trim trailing whitespace
+        description: trims trailing whitespace.
+        entry: trailing-whitespace-fixer
+        language: python
+        types: [text]
+        stages: [pre-commit, pre-push, manual]
+        minimum_pre_commit_version: 3.2.0
+        exclude: ^explore/|.*\.ipynb$
+
+  - repo: https://github.com/mxr/sync-pre-commit-deps
+    rev: v0.0.1
+    hooks:
+      - id: sync-pre-commit-deps
+        name: sync-pre-commit-deps
+        description: Sync pre-commit hook dependencies based on other installed hooks
+        entry: sync-pre-commit-deps
+        language: python
+        language_version: python3
+        files: '^\.pre-commit-config.yaml$'
+        exclude: ^explore/|.*\.ipynb$

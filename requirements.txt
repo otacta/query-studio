@@ -1,0 +1,10 @@
+langchain
+langchain-community
+pandas
+numpy
+tiktoken
+langchain-anthropic
+openpyxl
+python-dotenv
+psycopg2
+pre-commit

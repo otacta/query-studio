@@ -1,0 +1,20 @@
+# Database Configuration
+DB_CONFIG = {
+    "host":   # Replace with AWS RDS endpoint provided by Vamsi
+    "port": 5432,  # Default PostgreSQL port
+    "database": "dev",  # Replace with your database name
+    "user": "xxxxxx",  # Replace with your username
+    "password": "Password"  # Replace with your password
+}
+
+# Construct the connection string
+connection_string = f"postgresql://{DB_CONFIG['user']}:{DB_CONFIG['password']}@" \
+                        f"{DB_CONFIG['host']}:{DB_CONFIG['port']}/{DB_CONFIG['database']}"
+engine = None
+
+# Create an SQLAlchemy engine
+engine = create_engine(connection_string)
+
+# Query the table
+query = f"SELECT * FROM gold.{table_name};"
+df = pd.read_sql_query(query, con=engine)

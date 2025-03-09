@@ -1,62 +1,70 @@
-# Otacta QueryStudio
 
-## Overview
-Otacta QueryStudio is a freemium tool designed to streamline the process of converting natural language (NL) queries into SQL commands. The tool incorporates advanced AI features, including Chain-of-Thought (COT) reasoning, human-in-the-loop validation, and synthetic query generation, enabling developers and data scientists to efficiently create, validate, and deploy SQL queries with transparency and precision.
+# Otacta QueryStudio - A Text-To-SQL Implementation
 
-### Key Features
-- **Natural Language to SQL Automation**: Effortlessly converts user-friendly NL queries into SQL code.
-- **Chain-of-Thought Reasoning**: Provides logical explanations for SQL generation, enhancing transparency and learning.
-- **Human-in-the-Loop Validation**: Ensures accuracy and user oversight at key stages, including SQL validation and testing.
-- **Synthetic Query Generation**: Produces diverse query sets (up to 100x) to improve robustness.
-- **Seamless Integration**: Acts as the backbone for text-to-SQL workflows, centralizing key processes.
+## What is QueryStudio?
 
-### Objectives
-1. Automate the translation of NL queries into SQL.
-2. Enhance the accuracy and diversity of query generation.
-3. Provide detailed reasoning and validation mechanisms for SQL creation.
-4. Create an end-to-end workflow that combines AI-driven processes with human validation.
+🚀 QueryStudio is fully open-source. Star the repo, contribute, and help shape the future of AI-powered SQL automation!
 
-### Getting Started
-- Clone the repository: `git clone <repository-url>`
+QueryStudio is an open-source automation tool that helps AI teams generate high-quality structured SQL training datasets, metadata mappings, and Chain-of-Thought (COT) reasoning for Text-to-SQL (T2SQL) AI models.
+
+It is not a full Text-to-SQL solution but rather a key framework component that accelerates the development of such systems by automating and standardizing the most time-consuming parts of model training and fine-tuning.
+
+By reducing manual effort and ensuring consistency, QueryStudio enables AI engineers, data scientists, and researchers to fast-track the deployment of Text-to-SQL AI systems.
+
+### The Problem: Why Do We Need QueryStudio?
+
+Building Text-to-SQL AI models is difficult—not because the AI doesn’t work, but because the foundation needed to support it is inefficient, inconsistent, and fragmented.
+
+Many teams have attempted to build Text-to-SQL solutions, but most projects:
+- Get stuck in POC mode due to a lack of structured dataset preparation.
+- Struggle with consistency in SQL query generation, metadata mapping, and validation.
+- Require excessive manual effort to map schema relationships, generate SQL pairs, and refine LLM prompts.
+- End up reinventing the wheel, using different internal methods that slow down productionization.
+
+### Why is this a critical issue?
+
+- LLMs don’t "understand" SQL inherently—they rely on structured examples to make accurate predictions.
+- Manually curating these training datasets is slow, expensive, and inconsistent across projects.
+- Without standardized datasets, scaling Text-to-SQL AI remains inefficient and unpredictable.
+
+💡 QueryStudio solves this by automating query generation, metadata referencing, and COT structuring—helping AI teams accelerate development while improving accuracy and reliability.
+💡 Instead of spending weeks manually curating SQL training data, QueryStudio enables teams to bootstrap high-quality structured datasets in minutes.
+
+### Where Does QueryStudio Fit?
+![QueryStudio Diagram](diagram1.png)
+
+QueryStudio is not a Text-to-SQL pipeline itself but a tool that allows developers to:
+
+✔ LLM Training Pipelines – generate high-quality SQL-COT datasets for AI model fine-tuning.
+✔ Prompt Engineering Workflows – generate synthetic examples based on existing database for few-shot strategies.
+✔ Retrieval-Augmented Generation (RAG) Systems – Pre-caching validated SQL examples to improve query efficiency.
+✔ Enterprise AI & MLOps Pipelines – Automating SQL-related AI dataset preparation for internal AI teams.
+
+💡 If you're building a Text-to-SQL model, QueryStudio acts as a data layer that speeds up training, improves query accuracy, and ensures structured consistency.
+
+## Getting Started
+- Clone the repository: `git clone git@github.com:otacta/query-studio-internal.git` or `https://github.com/otacta/query-studio-internal.git`
 - Follow the instructions in the `docs/SETUP.md` to configure your environment and dependencies.
+- A walkthrough on how to use QueryStudio can be found in `docs/notebooks/query_studio.ipynb`.
 
-### Contribution Guidelines
+## Contribution Guidelines
 We welcome contributions from the community. Please follow these steps:
 1. Fork the repository.
 2. Create a new branch for your feature or bugfix.
 3. Commit your changes with descriptive messages.
 4. Submit a pull request for review.
 
----
+## Future Roadmap (v1.1 and Beyond)
 
-# Version Control Workflows
+### Upcoming Features
+🚀 Pre-cached SQL storage for efficient query execution
+🚀 Integration with retrieval-augmented generation (RAG) pipelines
+🚀 Enterprise-ready deployment enhancements
+🚀 UI/UX streamlining via a lightweight web interface
 
-## Branching Strategy
-- **Main Branch**: Contains production-ready code.
-- **Development Branch**: Used for integrating features before merging to the main branch.
-- **Feature Branches**: Each feature or bugfix should have its own branch, following the naming convention `feature/<feature-name>` or `bugfix/<bug-name>`.
+### What QueryStudio is NOT (Yet)
+- A full-fledged Text-to-SQL model – QueryStudio is a data preparation and automation tool, not an inference engine.
+- A direct competitor to RAG-based or vectorized Text-to-SQL retrieval – But it can integrate with such systems.
+- An enterprise-ready, production-deployed solution – It is an open-source framework component, designed to be customized and extended by AI teams.
 
-### Workflow:
-1. Create a branch from `development`: 
-   ```bash
-   git checkout -b feature/<feature-name> development
-   ```
-2. Commit changes locally and push the branch:
-   ```bash
-   git push origin feature/<feature-name>
-   ```
-3. Open a pull request from your branch to `development`.
-
-## Pull Requests
-- Include a detailed description of your changes.
-- Assign reviewers and include any relevant documentation.
-- Ensure all tests pass before submitting the pull request.
-
-## Issue Tracking
-- Use GitHub Issues for tracking bugs, features, and improvements.
-- Tag issues with appropriate labels (e.g., `bug`, `enhancement`, `documentation`).
-- Assign issues to team members for accountability.
-
----
-
-This README serves as the foundational documentation for the repository. Update it as the project evolves to include new features and workflows.
+(For now, QueryStudio is a Jupyter-based tool, but planned enhancements will improve usability for AI teams.)
