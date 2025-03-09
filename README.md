@@ -76,8 +76,8 @@ We’re excited to collaborate with the AI & Data Science community to push the 
 - Looking to contribute or explore enterprise-level solutions?
 
 **Reach out to us via:**
-- GitHub Discussions – Start a thread in Discussions (https://github.com/otacta/query-studio/issues)
+- GitHub Discussions – Start a thread in [Discussions](https://github.com/otacta/query-studio/issues) 
 - Email Us – admin@otacta.com
-- Join the Community – Engage with us on LinkedIn
+- Join the Community – Engage with us on LinkedIn (https://www.linkedin.com/company/otacta/)
 
 🚀 We’d love to hear your thoughts, collaborate on improvements, and see how QueryStudio helps your AI & ML projects!
